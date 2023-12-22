@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Login</h1>
+  {% if form.errors %}
+    {% for field, errors in form.errors.items() %}
+      {% for error in errors %}
+        <div class="alert alert-danger">
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  <form method="POST" action="{{ url_for('login') }}" class="col-md-6" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.username.label }}
+      {{ form.username(class="form-control", placeholder="Enter the username") }}
+    </div>
+
+
+    <div class="mb-3">
+      {{ form.password.label }}
+      {{ form.password(class="form-control", placeholder="Enter the password") }}
+    </div>
+
+
+
+    <div>
+      {{ form.submit(class="btn btn-success my-4")}}
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Edit your post</h1>
+    {% if form.errors %}
+    {% for field, errors in form.errors.items() %}
+    {% for error in errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    <form method="POST" action="{{ url_for('update_article', product_id=chosen_post.id) }}" class="col-md-6"
+          enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.title.label }}
+            {{ form.title(class="form-control", placeholder="Enter the title") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.content.label }}
+            {{ form.content(class="form-control", rows=10, placeholder="Enter the content") }}
+        </div>
+
+
+        <div class="mb-3">
+            {{ form.img.label.text }}
+            {{ form.img(class="form-control", placeholder="please upload an image") }}
+        </div>
+        <div>
+            {{ form.submit(class="btn btn-success my-4")}}
+        </div>
+    </form>
+</div>
+{% endblock %}

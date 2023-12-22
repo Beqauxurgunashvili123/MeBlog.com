@@ -1,0 +1,7 @@
+Flask
+Flask-login
+Flask-WTF
+Flask-SQLAlchemy
+Werkzeug
+gunicorn
+

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4 align="center"> you can add a blog in upload section</h4>
+<html>
+  <body style="background-color:#101317;">
+    <div class="container mt-5">
+
+      {% for article in articles %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <p class="card-text">{{ article.content }}</p>
+
+            {% if article.img %}
+              <img src="{{ url_for('static', filename=article.img) }}" alt="post Image" class="img-fluid">
+            {% else %}
+              <p>No image available</p>
+            {% endif %}
+
+            <p class="card-text"><strong>Author:</strong> {{ article.author.username }}</p>
+
+            <p>Posted on: {{ article.timestamp.strftime('%Y-%m-%d %H:%M:%S %Z') }}</p>
+
+            {% if current_user == article.author %}
+            <a href="{{ url_for('edit_article', product_id=article.id) }}" class="btn btn-primary">Edit</a>
+
+              <form method="POST" action="{{ url_for('delete_article', product_id=article.id) }}" style="display:inline;" onsubmit="return confirmDelete();">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            {% endif %}
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+{% endblock %}
+
+
+
