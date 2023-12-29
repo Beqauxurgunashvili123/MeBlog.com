@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h4 align="center"> you can add a blog in upload section</h4>
-<html>
-  <body style="background-color:#101317;">
-    <div class="container mt-5">
+   <div class="container mt-5">
 
       {% for article in articles %}
         <div class="card mb-3">
@@ -34,9 +31,53 @@
         </div>
       {% endfor %}
     </div>
+<h4 align="center"> you can add a blog in upload section</h4>
+<html>
+  <body style="background-color:#101317;">
+       <div class="container mt-5">
+
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">მეორე ბლოგი</h5>
+            <p class="card-text">ახალ წელს გილოცავთ!!!</p>
+
+
+              <img src="static/christmas.jpg" alt="post Image" class="img-fluid" width="500" height="500">
+
+
+
+            <p class="card-text"><strong>Author:</strong>ბექა</p>
+
+            <p>Posted on:  31/12/2024</p>
+
+
+          </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+      <div class="container mt-5">
+
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">პირველი ბლოგი</h5>
+            <p class="card-text">ეს არის პირველი ბლოგი</p>
+
+
+              <img src="static/tbc.png" alt="post Image" class="img-fluid">
+
+
+
+            <p class="card-text"><strong>Author:</strong>ბექა</p>
+
+            <p>Posted on:  29/12/2024</p>
+
+
+          </div>
+        </div>
+    </div>
+
   </body>
 </html>
 {% endblock %}
-
-
-
