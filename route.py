@@ -3,7 +3,7 @@ from flask_login import login_user, login_required, current_user
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename, os
-from ext import app, db
+from ext import app, db, login_manager
 from forms import Post, RegisterForm, LoginForm
 from models import Article, User
 
@@ -13,12 +13,14 @@ def index():
     articles = Article.query.order_by(desc(Article.timestamp)).all()
     return render_template('index.html', articles=articles)
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('login'))
 @app.route("/add_article", methods=["POST", "GET"])
 @login_required
 def add_article():
 
     form = Post()
-
     if form.validate_on_submit():
         try:
             if form.img.data:
@@ -41,11 +43,13 @@ def add_article():
 
 
             flash("Article added successfully", "success")
+
         finally:
             return redirect(url_for('index'))
 
 
     return render_template('add_article.html', form=form)
+
 
 
 @app.route("/update_article/<int:product_id>", methods=["POST"])
@@ -170,3 +174,4 @@ def search():
     else:
         results = []
     return render_template("search_results.html",  results=results, query=query)
+
